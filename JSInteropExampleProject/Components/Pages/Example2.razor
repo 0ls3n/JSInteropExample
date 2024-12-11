@@ -1,0 +1,30 @@
+﻿@rendermode InteractiveServer
+@inject IJSRuntime JS
+@page "/example2"
+
+
+<script>
+    function AnotherFunction(text)
+    {
+        window.alert(text);
+    }
+</script>
+
+<h1>JSInterop Example 2</h1>
+
+<hr>
+
+<div class="input-group mb-3">
+  <input type="text" @bind="ExampleVariable" class="form-control" placeholder="Write some text here!" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+
+<button class="btn btn-primary" @onclick="ExecuteAnotherFunction">Submit</button>
+
+
+@code{
+    public string? ExampleVariable {get; set;} = string.Empty;
+    public async Task ExecuteAnotherFunction()
+    {
+        await JS.InvokeVoidAsync("AnotherFunction", (ExampleVariable != string.Empty) ? ExampleVariable : "Please enter some text");
+    }
+}

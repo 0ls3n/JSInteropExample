@@ -1,0 +1,34 @@
+﻿@rendermode InteractiveServer
+@inject IJSRuntime JS
+@page "/"
+
+<PageTitle>Example 1</PageTitle>
+
+
+@* Javascript code to be called using JSInterop *@
+<script>
+    function AFunction() {
+        window.alert("window.alert() Executed using JSInterop!");
+    }
+</script>
+
+<h1>JSInterop Example 1</h1>
+
+<hr>
+
+<button class="btn btn-primary" @onclick="ExecuteAFunction">Please click me!</button>
+
+@code {
+    public async Task ExecuteAFunction()
+    {
+        //Execute Javascript function with IJSRuntime Interface
+        await JS.InvokeVoidAsync("AFunction");
+    }
+}
+
+
+
+
+
+
+
